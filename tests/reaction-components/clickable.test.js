@@ -16,7 +16,7 @@ suite('clickable-lifecycle', function () {
     const el = this.el
     el.removeAttribute('clickable')
     process.nextTick(function () {
-      assert.notOk(el.components.grabbable)
+      assert.notOk(el.components["sh-grabbable"])
       done()
     })
   })

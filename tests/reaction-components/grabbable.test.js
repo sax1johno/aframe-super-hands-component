@@ -3,39 +3,39 @@ const helpers = require('../helpers')
 const entityFactory = helpers.entityFactory
 const elFactory = helpers.elFactory
 const coord = AFRAME.utils.coordinates.parse
-suite('grabbable', function () {
-  suite('grabbable-lifecycle', function () {
+suite('sh-grabbable', function () {
+  suite('sh-grabbable-lifecycle', function () {
     setup(function (done) {
       const el = this.el = entityFactory()
-      el.setAttribute('grabbable', '')
+      el.setAttribute('sh-grabbable', '')
       el.addEventListener('loaded', function () {
         done()
       })
     })
     test('component attaches without errors', function () {
-      assert.isOk(this.el.components.grabbable.data.usePhysics)
+      assert.isOk(this.el.components["sh-grabbable"].data.usePhysics)
     })
     test('component removes without errors', function (done) {
       const el = this.el
-      el.removeAttribute('grabbable')
+      el.removeAttribute('sh-grabbable')
       process.nextTick(function () {
-        assert.notOk(el.components.grabbable)
+        assert.notOk(el.components["sh-grabbable"])
         done()
       })
     })
   })
 
-  suite('grabbable-function without physics', function () {
+  suite('sh-grabbable-function without physics', function () {
     setup(function (done) {
       const el = this.el = entityFactory()
-      el.setAttribute('grabbable', '')
+      el.setAttribute('sh-grabbable', '')
       this.hand = helpers.controllerFactory()
       el.parentNode.addEventListener('loaded', function () {
         done()
       })
     })
     test('initiates grab on event when not grabbed', function () {
-      const myGrabbable = this.el.components.grabbable
+      const myGrabbable = this.el.components["sh-grabbable"]
       const hand = this.hand
       const el = this.el
       assert.isNotOk(myGrabbable.grabbed)
@@ -48,7 +48,7 @@ suite('grabbable', function () {
       assert.isOk(el.is(myGrabbable.GRABBED_STATE))
     })
     test('ignores cancelled events', function () {
-      this.comp = this.el.components.grabbable
+      this.comp = this.el.components["sh-grabbable"]
       const evtCancelled = { defaultPrevented: true, detail: { hand: this.hand } }
       const evt = { detail: { hand: this.hand } }
       this.comp.start(evtCancelled)
@@ -58,7 +58,7 @@ suite('grabbable', function () {
       assert.isTrue(this.el.is(this.comp.GRABBED_STATE))
     })
     test('position updates during grab', function () {
-      const myGrabbable = this.el.components.grabbable
+      const myGrabbable = this.el.components["sh-grabbable"]
       assert.isTrue(this.el.getAttribute('position').equals(coord('0 0 0')))
       myGrabbable.start({ detail: { hand: this.hand } })
       /* with render loop stubbed out, need to force ticks */
@@ -71,7 +71,7 @@ suite('grabbable', function () {
       'position does not update during grab when usePhysics set to "only"',
       function () {
         const posStub = this.sinon.stub(this.hand, 'getAttribute')
-        const myGrabbable = this.el.components.grabbable
+        const myGrabbable = this.el.components["sh-grabbable"]
         assert.isTrue(this.el.getAttribute('position').equals(coord('0 0 0')))
         posStub.withArgs('position')
           .onFirstCall().returns(coord('0 0 0'))
@@ -83,7 +83,7 @@ suite('grabbable', function () {
       })
     test('updates cease on release event', function () {
       const posStub = this.sinon.stub(this.hand, 'getAttribute')
-      const myGrabbable = this.el.components.grabbable
+      const myGrabbable = this.el.components["sh-grabbable"]
       assert.isTrue(this.el.getAttribute('position').equals(coord('0 0 0')))
       posStub.withArgs('position')
         .onFirstCall().returns(coord('0 0 0'))
@@ -98,7 +98,7 @@ suite('grabbable', function () {
       assert.notOk(myGrabbable.grabber)
     })
     test('grabbing from a second hand does not change grabber', function () {
-      const myGrabbable = this.el.components.grabbable
+      const myGrabbable = this.el.components["sh-grabbable"]
       const secondHand = {}
       myGrabbable.start({ detail: { hand: this.hand } })
       myGrabbable.start({ detail: { hand: secondHand } })
@@ -119,7 +119,7 @@ suite('grabbable', function () {
       })
       const elPromise = new Promise(resolve => {
         el.addEventListener('body-loaded', evt => {
-          this.comp = el.components.grabbable
+          this.comp = el.components["sh-grabbable"]
           resolve()
         })
         el.setAttribute('grabbable', '')
@@ -152,7 +152,7 @@ suite('grabbable', function () {
       this.comp.start({ detail: { hand: this.hand } })
       assert.isOk(this.comp.constraints.has(this.hand))
       const constraint = this.comp.constraints.get(this.hand)
-      this.el.setAttribute('grabbable', 'usePhysics', 'never')
+      this.el.setAttribute('sh-grabbable', 'usePhysics', 'never')
       assert.notOk(this.comp.constraints.has(this.hand))
       assert.strictEqual(this.el.body.world.constraints.indexOf(constraint), -1)
       assert.strictEqual(this.comp.constraints.size, 0)
@@ -166,9 +166,9 @@ suite('grabbable', function () {
         .controllerFactory({ 'super-hands': '' })
       this.hand2 = helpers
         .controllerFactory({ 'super-hands': '' })
-      el.setAttribute('grabbable', '')
+      el.setAttribute('sh-grabbable', '')
       el.sceneEl.addEventListener('loaded', evt => {
-        this.comp = el.components.grabbable
+        this.comp = el.components["sh-grabbable"]
         done()
       })
     })
@@ -213,7 +213,7 @@ suite('grabbable', function () {
       el.setAttribute('geometry', 'primitive: box')
       el.setAttribute('body', 'shape: box;')
       el.addEventListener('body-loaded', evt => {
-        this.comp = el.components.grabbable
+        this.comp = el.components["sh-grabbable"]
         if (!this.hand2.body) {
           this.hand2.addEventListener('body-loaded', evt => done())
         } else {
@@ -248,7 +248,7 @@ suite('grabbable', function () {
       el.setAttribute('grabbable',
         'startButtons: triggerdown; endButtons: triggerup')
       el.addEventListener('loaded', () => {
-        this.comp = el.components.grabbable
+        this.comp = el.components["sh-grabbable"]
         done()
       })
     })

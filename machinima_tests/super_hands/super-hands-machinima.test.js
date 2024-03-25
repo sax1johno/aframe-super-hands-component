@@ -96,8 +96,8 @@ suite('basic interactions', function () {
     'base/recordings/hands-nostretch-badTwoHandedGrab.json',
     function () {
       assert.isBelow(this.boxGrnUp.getAttribute('position').z, -0.8)
-      assert.isFalse(this.boxGrnUp.components.grabbable.grabbed)
-      assert.strictEqual(this.boxGrnUp.components.grabbable.grabbers.length, 0)
+      assert.isFalse(this.boxGrnUp.components["sh-grabbable"].grabbed)
+      assert.strictEqual(this.boxGrnUp.components["sh-grabbable"].grabbers.length, 0)
     },
     function () {
       // disable stretching so hand can leave collision zone while grabbing
@@ -214,7 +214,7 @@ suite.skip('Physics worker driver', function () {
   )
 })
 
-suite('laser-controls grabbable', function () {
+suite('laser-controls sh-grabbable', function () {
   setup(function (done) {
     machinima.setupScene('hands-laser.html')
     this.scene = document.querySelector('a-scene')
@@ -259,10 +259,10 @@ suite('raycaster', function () {
       assert.strictEqual(this.boxRedDn.getAttribute('position').x, 0, 'Red unmoved')
     },
     function () {
-      this.boxRedUp.setAttribute('grabbable', 'startButtons: trackpaddown; endButtons: trackpadup')
-      this.boxRedDn.setAttribute('grabbable', 'startButtons: trackpaddown; endButtons: trackpadup')
-      this.boxGrnUp.setAttribute('grabbable', 'startButtons: triggerdown; endButtons: triggerup')
-      this.boxBlueUp.setAttribute('grabbable', 'startButtons: triggerdown; endButtons: triggerup')
+      this.boxRedUp.setAttribute('sh-grabbable', 'startButtons: trackpaddown; endButtons: trackpadup')
+      this.boxRedDn.setAttribute('sh-grabbable', 'startButtons: trackpaddown; endButtons: trackpadup')
+      this.boxGrnUp.setAttribute('sh-grabbable', 'startButtons: triggerdown; endButtons: triggerup')
+      this.boxBlueUp.setAttribute('sh-grabbable', 'startButtons: triggerdown; endButtons: triggerup')
     }
   )
 })

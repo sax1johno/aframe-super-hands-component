@@ -43,7 +43,7 @@ as your tracked controllers and/or your cursor raycaster.
 communicates user intent via gesture events to the entities users want to
 interact with; reaction components
 enable the interactivity on those entities. This package includes components for
-common reactions, `hoverable`, `clickable`, `grabbable`, `stretchable`,
+common reactions, `hoverable`, `clickable`, `sh-grabbable`, `stretchable`,
 `draggable`, and `droppable`, and it is also designed to be easily
 extended with your own custom reaction components.
 
@@ -98,7 +98,7 @@ require('super-hands');
 * [Super Hands Core Component](#super-hands-component)
 * [Reaction components](#reaction-components)
   * [`hoverable`](#hoverable-component)
-  * [`grabbable`](#grabbable-component)
+  * [`sh-grabbable`](#grabbable-component)
     * [`clickable`](#clickable-component)
   * [`stretchable`](#stretchable-component)
   * [`draggable`](#draggable-component)
@@ -263,10 +263,10 @@ by adding the 'hovered' state.
 | hovered | Added to entity while it is collided with the controller |
 
 
-### grabbable component
+### sh-grabbable component
 
 Makes and entity move along with the controller's movement and rotation
-while it is grabbed. `grabbable` works with
+while it is grabbed. `sh-grabbable` works with
 up-close grabbing (6DOF controllers like Vive and Oculus Touch
 with `hand-controls` and `sphere-collider`)
 and with pointing at a distance (3DOF controllers like GearVR and Daydream
@@ -308,9 +308,9 @@ recognized by `super-hands` `grabStartButtons` and `grabDropEndButtons`.
 
 ### clickable component
 
-An alternative version of `grabbable` that registers that a button was pressed, but does not
-move the entity. Do not use `clickable` and `grabbable` on the same entity
-(just use `grabbable` and watch the "grabbed" state instead of "clicked")
+An alternative version of `sh-grabbable` that registers that a button was pressed, but does not
+move the entity. Do not use `clickable` and `sh-grabbable` on the same entity
+(just use `sh-grabbable` and watch the "grabbed" state instead of "clicked")
 
 #### Component Schema
 
@@ -368,7 +368,7 @@ loss of sync between stretched entities' appearance and behavior.
 
 `draggable` makes an entity able to participate in a drag and drop
 gesture with a `droppable` entity. This does not move an entity
-(also add `grabbable` for that functionality), but instead tracks whether
+(also add `sh-grabbable` for that functionality), but instead tracks whether
 a gesture has been made that involves pressing a button down with the controller
 pointed at this entity, and then moving the controller to point at another
 entity with the `droppable` component before releasing.

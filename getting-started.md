@@ -22,14 +22,14 @@ _note: trying `physics="gravity: 0"` can sometimes help with debugging some issu
 Add these mixins within your `<a-assets>`.
 ```html
         <a-mixin id="all-interactions"
-                 hoverable grabbable stretchable draggable
+                 hoverable sh-grabbable stretchable draggable
                  event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
                  event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
                  dynamic-body
         ></a-mixin>
 
         <a-mixin id="grab-move"
-                 hoverable grabbable draggable
+                 hoverable sh-grabbable draggable
                  event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
                  event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
                  dynamic-body

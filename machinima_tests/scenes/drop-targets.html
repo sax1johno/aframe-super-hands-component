@@ -10,7 +10,7 @@
         <a-mixin id="controller" super-hands
                  sphere-collider="objects: .cube"></a-mixin>
         <a-mixin id="cube" geometry="primitive: box; width: 0.5; height: 0.5; depth: 0.5"
-                 hoverable grabbable stretchable draggable
+                 hoverable sh-grabbable stretchable draggable
                  droppable="acceptEvent: drag-drop-accepted; rejectEvent: drag-drop-rejected"
                  event-set__accept="_event: drag-drop-accepted; geometry.radius: 0.25; geometry.primitive: sphere;"
                  event-set__reject="_event: drag-drop-rejected; geometry.radius: 0.25; geometry.primitive: tetrahedron;"

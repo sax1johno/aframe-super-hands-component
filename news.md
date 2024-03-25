@@ -1,5 +1,9 @@
 ## News
 
+v3.1.0
+* A-Frame 1.5.0 support
+  * BREAKING CHANGE: `grabbable` component changed to `sh-grabbable` to avoid conflict with AFrame core `grabbable` component.
+
 v3.0.4
 * A-Frame 1.4.0 support confirmation
   * Updated dependencies and fixed tests and examples

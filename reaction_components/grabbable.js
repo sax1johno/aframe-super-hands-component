@@ -4,7 +4,7 @@ const physicsCore = require('./prototypes/physics-grab-proto.js')
 const buttonsCore = require('./prototypes/buttons-proto.js')
 // new object with all core modules
 const base = inherit({}, physicsCore, buttonsCore)
-AFRAME.registerComponent('grabbable', inherit(base, {
+AFRAME.registerComponent('sh-grabbable', inherit(base, {
   schema: {
     maxGrabbers: { type: 'int', default: NaN },
     invert: { default: false },
@@ -84,7 +84,7 @@ AFRAME.registerComponent('grabbable', inherit(base, {
 
     if (this.grabbers.indexOf(evt.detail.hand) === -1 && grabAvailable) {
       if (!evt.detail.hand.object3D) {
-        console.warn('grabbable entities must have an object3D')
+        console.warn('sh-grabbable entities must have an object3D')
         return
       }
       this.grabbers.push(evt.detail.hand)
